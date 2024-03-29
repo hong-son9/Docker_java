@@ -1,0 +1,27 @@
+dir
+mvnw spring-boot:run
+
+tao file Dokerfile va .dockerignore
+docker build --tag springboot-docker .
+docker build -t phihongson/springboot-docker:v1.0.0 .
+
+docker image ls
+docker tag springboot-docker:latest springboot-docker:v1.0.0: doi tag
+xóa image: docker rmi -f e43b105ac3e0
+
+docker push ....
+
+docker restart springboot-docker-container
+docker run -dp 8085:8083 --name springboot-docker-container -v "C:\Users\Admin\OneDrive\Documents\Java\java_docker:/app" phihongson/springboot-docker:v1.0.0
+docker network create springboot-app-network: tạo network
+
+docker run --rm -d -v mysql-springboot-data:/var/lib/mysql -v mysql-springboot-config-deamond:/etc/mysql/conf.d --name mysql-springboot-container -p 3310:3306 -e MYSQL_USER=sonph -e MYSQL_PASSWORD=12345 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=java_docker --network springboot-app-network mysql:8.0.35
+
+kết nối network:
+docker run -dp 8085:8083 --name springboot-docker-container -v "C:\Users\Admin\OneDrive\Documents\Java\java_docker:/app" --network springboot-app-network phihongson/springboot-docker:v1.0.0
+
+vao mysql:
+docker exec -ti mysql-springboot-container mysql -u root -p
+
+build Docker compose:
+docker-compose -f docker-compose.dev.yml up --build
